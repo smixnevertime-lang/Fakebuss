@@ -419,12 +419,15 @@
 
     function renderReceivedMessage(boardNumber, dateObj, ticketNumber) {
         const dateTimeStr = `${formatDate(dateObj)} ${formatTime(dateObj)}`;
+        
+        // Проверка: если сообщение состоит строго из 3 цифр — IM IPUA, иначе IM RTEC
+        const companyHeader = /^\d{3}$/.test(boardNumber.trim()) ? 'IM IPUA' : 'IM RTEC';
 
         const msgDiv = document.createElement('div');
         msgDiv.className = 'message-row received';
         msgDiv.innerHTML = `
             <div class="message-bubble">
-                IM RTEC<br><br>
+                ${companyHeader}<br><br>
                 Bilet Nr ${ticketNumber}<br><br>
                 <span class="ticket-date">${dateTimeStr}</span><br><br>
                 Pret 7 MDL<br><br>
@@ -499,3 +502,4 @@
 </script>
 </body>
 </html>
+
